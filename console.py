@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+"""[summary]
+"""
+
 import cmd
 from models.base_model import BaseModel
 from engine.file_storage import FileStorage
