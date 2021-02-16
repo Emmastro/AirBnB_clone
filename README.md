@@ -3,7 +3,7 @@
  <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
 </p>
 
-<h3 align="center">Project Title</h3>
+<h3 align="center">Airbnb Clone</h3>
 
 <div align="center">
 
@@ -85,6 +85,12 @@ Explain what these tests test and why
 ```
 Give an example
 ```
+
+#### Run all unit tests
+`python3 -m unittest discover tests`
+
+#### Run a test from a specific file
+`python3 -m unittest tests/test_models/test_base_model.py`
 
 ## 🎈 Usage <a name="usage"></a>
 

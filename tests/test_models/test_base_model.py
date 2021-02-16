@@ -10,4 +10,7 @@ class TestClass(unittest.TestCase):
 
     def test_create_istance(self):
         new_model = BaseModel()
-        self.assertIsInstance(new_model, BaseModel())
+        self.assertIsInstance(new_model, BaseModel)
+
+if __name__ == '__main__':
+    unittest.main()
