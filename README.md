@@ -90,7 +90,7 @@ Give an example
 `python3 -m unittest discover tests`
 
 #### Run a test from a specific file
-`python3 -m unittest tests/test_models/test_base_model.py`
+`python3 -m unittest tests/tespytestt_models/test_base_model.py`
 
 ## 🎈 Usage <a name="usage"></a>
 
