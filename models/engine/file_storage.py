@@ -5,8 +5,7 @@ File storage:  serializes instances to a JSON file and
 """
 import json
 import os
-from models.base_model import BaseModel
-from json import JSONEncoder
+import models
 
 
 class FileStorage:
@@ -18,9 +17,10 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
+
     def __init__(self):
         super().__init__()
-        self.reload()
+
 
     def all(self):
         """return the class atribute objects"""
@@ -34,16 +34,26 @@ class FileStorage:
     def save(self):
         """ serializes __objects to the JSON file (path: __file_path)"""
         file = FileStorage.__file_path
-        with open(file, mode="a", encoding="utf-8") as f:
-            f.write(json.dumps(FileStorage.__objects, cls=BaseModelEncoder,  indent=4))
+        with open(file, mode="w", encoding="utf-8") as f:
+            f.write(json.dumps(FileStorage.__objects, cls=models.base_model.BaseModelEncoder,  indent=4))
 
     def reload(self):
         """deserializes the JSON file to __objects"""
+
         file = FileStorage.__file_path
         if os.path.exists(file):
             with open(file, mode="r", encoding="utf-8") as f:
-                file_string = f.read()#.replace('\n', '')
-                self.__objects = json.loads(file_string)
+                file_string = f.read().replace('\n', '')
+                data = json.loads(file_string)
+                print(data)
+                for object_key, model_data in data.items():
+                    model_name, model_id = object_key.split('.')
+                    model = models.classes[model_name]()
+
+                    for key, value in model_data.items():
+                        if key != '__class__':
+                            setattr(model, key, value)
+                    self.new(model)
 
     def update(self, obj_name, obj_id, attr, value):
         try:
@@ -65,8 +75,3 @@ class FileStorage:
             raise Exception("** no instance found **")
 
 
-class BaseModelEncoder(JSONEncoder):
-    def default(self, o):
-        if isinstance(o, BaseModel):
-            return o.to_dict()
-        return super().default(o)

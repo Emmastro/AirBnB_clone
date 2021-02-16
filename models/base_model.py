@@ -4,7 +4,8 @@ base class file
 """
 import uuid
 from datetime import datetime
-
+import models
+from json import JSONEncoder
 
 class BaseModel:
     """
@@ -33,6 +34,7 @@ class BaseModel:
     def save(self):
         """save new informations to the class object"""
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """return dictionary representaton of the instance"""
@@ -48,3 +50,9 @@ class BaseModel:
         """return the string formated message when instance is called"""
         clName = self.__class__.__name__
         return "[{}] ({}) <{}>".format(clName, self.id, self.__dict__)
+
+class BaseModelEncoder(JSONEncoder):
+    def default(self, o):
+        if isinstance(o, BaseModel):
+            return o.to_dict()
+        return super().default(o)

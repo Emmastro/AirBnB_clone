@@ -3,22 +3,18 @@
 """
 
 import cmd
-from models.base_model import BaseModel
-from engine.file_storage import FileStorage
+import models
 
 class HBNBCommand(cmd.Cmd):
 
-    intro = 'Welcome to the turtle shell.   Type help or ? to list commands.\n'
+    intro = 'Welcome to the Airbnb console. Type help or ? to list commands.\n'
     prompt = '(hbnb) '
-    file = None
-    models = [BaseModel]
-    storage = FileStorage()
 
     def __init__(self, completekey='tab', stdin=None, stdout=None):
         super().__init__(completekey, stdin, stdout)
 
-
-    def do_quit(self):
+    
+    def do_quit(self, arg):
         """Quit command to exit the program"""
         exit()
     
@@ -29,9 +25,9 @@ class HBNBCommand(cmd.Cmd):
             print('** class name missing **')
             return
         try:
-            model = self.get_model(arg)()
-            self.storage.new(model)
-            self.storage.save()
+            model = models.classes[arg]()
+            models.storage.new(model)
+            models.storage.save()
             print(model.id)
         except Exception as e:
             print(e)
@@ -82,7 +78,7 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """Prints all string representation of all instances based or not on the class name"""
         if arg == "": #TODO: make this common check a property
-            print([x.__str__() for x in self.storage.all().values()])
+            print([x.__str__() for x in models.storage.all().values()])
         else:
 
             try:
@@ -128,16 +124,8 @@ class HBNBCommand(cmd.Cmd):
                 print("** too many arguments (2 arguments required)**")
             else:
                 print(e)
-    
-    def get_model(self, value):
-        for model in self.models:
-            if model.__name__ == value:
-                 return model
 
         raise Exception("** class doesn't exist **")
-
-    def close(self):
-        self.storage.save()
 
 
 if __name__ == '__main__':
