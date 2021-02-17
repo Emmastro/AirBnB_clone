@@ -17,7 +17,13 @@ class Objects(dict):
             return super(Objects, self).__getitem__(key)
         except Exception as e:
             raise KeyError("** no instance found **")
-
+    
+    def pop(self, key):
+        """pop item"""
+        try:
+            return super(Objects, self).pop(key)
+        except Exception as e:
+            raise KeyError("** no instance found **")
 
 class FileStorage:
     """
@@ -63,11 +69,12 @@ class FileStorage:
                 data = json.loads(file_string)
                 for object_key, model_data in data.items():
                     model_name, model_id = object_key.split('.')
-                    model = models.classes[model_name]()
 
-                    for key, value in model_data.items():
-                        if key != '__class__':
-                            setattr(model, key, value)
+                    model = models.classes[model_name](**model_data)
+
+                    # for key, value in model_data.items():
+                    #    if key != '__class__':
+                    #        setattr(model, key, value)
                     self.new(model)
         except:
             pass
@@ -85,4 +92,4 @@ class FileStorage:
         """
         delete object with id `obj_id`
         """
-        del(self.__objects["{}.{}".format(obj_name, obj_id)])
+        return self.__objects.pop("{}.{}".format(obj_name, obj_id))
