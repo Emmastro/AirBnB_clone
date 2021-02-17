@@ -19,7 +19,6 @@ class BaseModel:
         """initialize the instance of the class"""
         if kwargs:
             for key, value in kwargs.items():
-            
                 if key == "created_at" or key == "updated_at":
                     value = datetime.strptime(
                             value,
