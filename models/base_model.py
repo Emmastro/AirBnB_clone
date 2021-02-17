@@ -57,6 +57,7 @@ class BaseModelEncoder(JSONEncoder):
     """JSON Encoder for BaseModel
     """
     def default(self, o):
+        """ default"""
         if isinstance(o, BaseModel):
             return o.to_dict()
         return super().default(o)
