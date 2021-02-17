@@ -100,8 +100,6 @@ class HBNBCommand(cmd.Cmd):
                 model = models.classes[arg]
                 resp = []
                 for l in models.storage.all().values():
-
-                    print(model == type(l))
                     if type(l) == model:
                         resp.append(l.__str__())
                 print(resp)

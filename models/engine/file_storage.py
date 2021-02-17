@@ -65,17 +65,13 @@ class FileStorage:
         file = FileStorage.__file_path
         try:
             with open(file, mode="r", encoding="utf-8") as f:
-                file_string = f.read().replace('\n', '')
+                file_string = f.read()
                 data = json.loads(file_string)
                 for object_key, model_data in data.items():
                     model_name, model_id = object_key.split('.')
-
                     model = models.classes[model_name](**model_data)
-
-                    # for key, value in model_data.items():
-                    #    if key != '__class__':
-                    #        setattr(model, key, value)
                     self.new(model)
+
         except Exception as e:
             print(e)
 
