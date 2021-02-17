@@ -3,6 +3,7 @@
 File storage:  serializes instances to a JSON file and
     deserializes JSON file to instances:
 """
+
 import json
 import models
 
@@ -28,6 +29,7 @@ class FileStorage:
     __objects = Objects()
 
     def __init__(self):
+        """init method"""
         super().__init__()
 
     def all(self):

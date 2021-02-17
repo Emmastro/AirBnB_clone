@@ -2,6 +2,7 @@
 """
 base class file
 """
+
 import uuid
 from datetime import datetime
 import models
@@ -56,6 +57,7 @@ class BaseModel:
 class BaseModelEncoder(JSONEncoder):
     """JSON Encoder for BaseModel
     """
+
     def default(self, o):
         """ default"""
         if isinstance(o, BaseModel):
