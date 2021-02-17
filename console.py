@@ -75,6 +75,7 @@ class HBNBCommand(cmd.Cmd):
 
         try:
             model_name, model_id = arg.split(' ')
+            models.classes[model_name] # check the model is supported
             models.storage.delete(model_name, model_id)
             models.storage.save()
 

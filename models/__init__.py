@@ -1,6 +1,13 @@
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
+
 storage = FileStorage()
+
 
 class Classes(dict):
     """ classes """
@@ -9,10 +16,10 @@ class Classes(dict):
         try:
             return super(Classes, self).__getitem__(key)
         except Exception as e:
-            raise KeyError("** class doesn't exist **")
+            raise Exception("** class doesn't exist **")
 
-classes = Classes(**{
-    BaseModel.__name__: BaseModel
-    })
+
+models = [BaseModel, Place, State, City, Amenity, Review]
+classes = Classes(**{x.__name__: x for x in models})
 
 storage.reload()

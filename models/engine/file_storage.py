@@ -16,14 +16,14 @@ class Objects(dict):
         try:
             return super(Objects, self).__getitem__(key)
         except Exception as e:
-            raise KeyError("** no instance found **")
+            raise Exception("** no instance found **")
     
     def pop(self, key):
         """pop item"""
         try:
             return super(Objects, self).pop(key)
         except Exception as e:
-            raise KeyError("** no instance found **")
+            raise Exception("** no instance found **")
 
 class FileStorage:
     """
@@ -76,8 +76,8 @@ class FileStorage:
                     #    if key != '__class__':
                     #        setattr(model, key, value)
                     self.new(model)
-        except:
-            pass
+        except Exception as e:
+            print(e)
 
     def update(self, obj_name, obj_id, attr, value):
         """update object with id `obj_id`"""

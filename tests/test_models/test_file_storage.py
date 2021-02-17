@@ -37,7 +37,7 @@ class TestClass(unittest.TestCase):
 
         self.storage.new(self.model)
         self.assertRaisesRegex(
-            KeyError,
+            Exception,
             'no instance found',
             self.storage.find,
             'BaseModel',
