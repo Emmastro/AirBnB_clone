@@ -95,19 +95,17 @@ class HBNBCommand(cmd.Cmd):
         if arg == "":
             print([x.__str__() for x in models.storage.all().values()])
         else:
-
             try:
-                model = models.get_model(arg)
+                model = models.classes[arg]
                 resp = []
                 for l in models.storage.all().values():
+
+                    print(model == type(l))
                     if type(l) == model:
                         resp.append(l.__str__())
-
+                print(resp)
             except Exception as e:
                 print(e)
-                return
-
-            return resp
 
     def do_update(self, arg):
         """
@@ -140,8 +138,6 @@ class HBNBCommand(cmd.Cmd):
                 print("** too many arguments (2 arguments required)**")
             else:
                 print(e)
-
-        raise Exception("** class doesn't exist **")
 
 
 if __name__ == '__main__':
