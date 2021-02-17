@@ -57,7 +57,6 @@ class FileStorage:
             with open(file, mode="r", encoding="utf-8") as f:
                 file_string = f.read().replace('\n', '')
                 data = json.loads(file_string)
-                print(data)
                 for object_key, model_data in data.items():
                     model_name, model_id = object_key.split('.')
                     model = models.classes[model_name]()

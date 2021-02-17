@@ -12,6 +12,12 @@ class TestClass(unittest.TestCase):
         new_model = BaseModel()
         self.assertIsInstance(new_model, BaseModel)
 
+    def test_assign_attribute(self):
+        my_model = BaseModel()
+        my_model.name = "Holberton"
+        my_model.my_number = 89
+        self.assertIs(my_model.name, "Holberton")
+        self.assertIs(my_model.my_number, 89)
 
 if __name__ == '__main__':
     unittest.main()
