@@ -6,6 +6,7 @@ File storage:  serializes instances to a JSON file and
 
 import json
 import models
+import os
 
 
 class Objects(dict):
@@ -51,6 +52,7 @@ class FileStorage:
     def save(self):
         """ serializes __objects to the JSON file (path: __file_path)"""
         file = FileStorage.__file_path
+
         with open(file, mode="w", encoding="utf-8") as f:
             f.write(
                 json.dumps(
@@ -63,8 +65,10 @@ class FileStorage:
         """deserializes the JSON file to __objects"""
 
         file = FileStorage.__file_path
+        if not os.path.exists(file):
+            return
         try:
-            with open(file, mode="r", encoding="utf-8") as f:
+            with open(file, mode="r+", encoding="utf-8") as f:
                 file_string = f.read()
                 data = json.loads(file_string)
                 for object_key, model_data in data.items():
