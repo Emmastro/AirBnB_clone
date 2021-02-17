@@ -9,8 +9,10 @@ import models
 
 
 class Objects(dict):
+    """class object"""
 
     def __getitem__(self, key):
+        """get item"""
         try:
             return super(Objects, self).__getitem__(key)
         except Exception as e:
@@ -35,8 +37,9 @@ class FileStorage:
 
     def new(self, obj):
         """sets in __objects the obj with key <obj class name>.id"""
-        key = '{}.{}'.format(type(obj).__name__, obj.id)
-        self.__objects[key] = obj
+        if obj is not None:
+            key = '{}.{}'.format(type(obj).__name__, obj.id)
+            self.__objects[key] = obj
 
     def save(self):
         """ serializes __objects to the JSON file (path: __file_path)"""
