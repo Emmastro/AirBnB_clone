@@ -4,7 +4,6 @@ File storage:  serializes instances to a JSON file and
     deserializes JSON file to instances:
 """
 import json
-import os
 import models
 
 
@@ -56,7 +55,7 @@ class FileStorage:
         """deserializes the JSON file to __objects"""
 
         file = FileStorage.__file_path
-        if os.path.exists(file):
+        try:
             with open(file, mode="r", encoding="utf-8") as f:
                 file_string = f.read().replace('\n', '')
                 data = json.loads(file_string)
@@ -68,6 +67,8 @@ class FileStorage:
                         if key != '__class__':
                             setattr(model, key, value)
                     self.new(model)
+        except:
+            pass
 
     def update(self, obj_name, obj_id, attr, value):
         """update object with id `obj_id`"""
