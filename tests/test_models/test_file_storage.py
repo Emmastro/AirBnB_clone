@@ -11,10 +11,31 @@ from models.base_model import BaseModel
 class TestClass(unittest.TestCase):
     """Test cases"""
 
+    def setUp(self):
+        self.storage = FileStorage()
+        self.model = BaseModel()
+        return super().setUp()
+
+    def tearDown(self):
+        del(self.storage) 
+        del(self.model)
+        return super().tearDown()
+
     def test_is_instance(self):
         """isInstance"""
-        new_st = FileStorage()
-        self.assertIsInstance(new_st, FileStorage)
+
+        self.assertIsInstance(self.storage, FileStorage)
+
+    def test_find_object_success(self):
+
+        self.storage.new(self.model)
+        self.assertIs(self.storage.find('BaseModel', self.model.id), self.model)
+
+
+    def test_find_object_not_found(self):
+
+        self.storage.new(self.model)
+        self.assertRaisesRegex(KeyError, 'no instance found', self.storage.find, 'BaseModel', 'does-not-exist')
 
     def test_new_method(self):
         """new"""
@@ -28,7 +49,7 @@ class TestClass(unittest.TestCase):
         """reload function"""
         pass
 
-    def test_functtion_all(self):
+    def test_function_all(self):
         """all functions"""
         pass
 
