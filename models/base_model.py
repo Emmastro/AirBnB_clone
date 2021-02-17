@@ -7,6 +7,7 @@ from datetime import datetime
 import models
 from json import JSONEncoder
 
+
 class BaseModel:
     """
     =========
@@ -21,10 +22,13 @@ class BaseModel:
                 if key != "__class__":
                     self.__dict__[key] = value
             if "created_at" in kwargs.keys():
-                self.created_at = datetime.strptime(kwargs["created_at"],
-                    '%Y-%m-%dT%H:%M:%S.%f')
+                self.created_at = datetime.strptime(
+                        kwargs["created_at"],
+                        '%Y-%m-%dT%H:%M:%S.%f')
+
             if "updated_at" in kwargs.keys():
-                self.updated_at = datetime.strptime(kwargs["updated_at"],
+                self.updated_at = datetime.strptime(
+                    kwargs["updated_at"],
                     '%Y-%m-%dT%H:%M:%S.%f')
         else:
             self.id = str(uuid.uuid4())
@@ -51,7 +55,10 @@ class BaseModel:
         clName = self.__class__.__name__
         return "[{}] ({}) <{}>".format(clName, self.id, self.__dict__)
 
+
 class BaseModelEncoder(JSONEncoder):
+    """JSON Encoder for BaseModel
+    """
     def default(self, o):
         if isinstance(o, BaseModel):
             return o.to_dict()
