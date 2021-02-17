@@ -67,7 +67,8 @@ class FileStorage:
 
                     for key, value in model_data.items():
                         if key != '__class__':
-                            setattr(model, key, value)
+                            if "BaseModel" in model_data.keys():
+                                setattr(model, key, value)
                     self.new(model)
         except:
             pass
