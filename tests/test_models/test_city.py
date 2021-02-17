@@ -32,5 +32,6 @@ class TestClass(unittest.TestCase):
         new_city = City()
         self.assertEqual(isinstance(new_city, BaseModel), True)
 
+
 if __name__ == '__main__':
     unittest.main()

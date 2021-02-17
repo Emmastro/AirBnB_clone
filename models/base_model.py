@@ -51,7 +51,7 @@ class BaseModel:
     def __str__(self):
         """return the string formated message when instance is called"""
         clName = self.__class__.__name__
-        return "[{}] ({}) <{}>".format(clName, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(clName, self.id, self.__dict__)
 
 
 class BaseModelEncoder(JSONEncoder):

@@ -14,5 +14,6 @@ class TestClass(unittest.TestCase):
         """test encoder"""
         pass
 
+
 if __name__ == '__main__':
     unittest.main()

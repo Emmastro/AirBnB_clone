@@ -21,5 +21,6 @@ class TestClass(unittest.TestCase):
         new_place = Place()
         self.assertIsInstance(new_place, BaseModel)
 
+
 if __name__ == '__main__':
     unittest.main()

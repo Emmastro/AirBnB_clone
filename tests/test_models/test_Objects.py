@@ -17,5 +17,6 @@ class TestClass(unittest.TestCase):
         new_o = Objects(new_city.__dict__)
         self.assertIsInstance(new_o, Objects)
 
+
 if __name__ == '__main__':
     unittest.main()

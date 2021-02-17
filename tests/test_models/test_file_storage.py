@@ -17,7 +17,7 @@ class TestClass(unittest.TestCase):
         return super().setUp()
 
     def tearDown(self):
-        del(self.storage) 
+        del(self.storage)
         del(self.model)
         return super().tearDown()
 
@@ -29,13 +29,19 @@ class TestClass(unittest.TestCase):
     def test_find_object_success(self):
 
         self.storage.new(self.model)
-        self.assertIs(self.storage.find('BaseModel', self.model.id), self.model)
-
+        self.assertIs(
+            self.storage.find('BaseModel', self.model.id), self.model
+            )
 
     def test_find_object_not_found(self):
 
         self.storage.new(self.model)
-        self.assertRaisesRegex(KeyError, 'no instance found', self.storage.find, 'BaseModel', 'does-not-exist')
+        self.assertRaisesRegex(
+            KeyError,
+            'no instance found',
+            self.storage.find,
+            'BaseModel',
+            'does-not-exist')
 
     def test_new_method(self):
         """new"""
@@ -52,6 +58,7 @@ class TestClass(unittest.TestCase):
     def test_function_all(self):
         """all functions"""
         pass
+
 
 if __name__ == '__main__':
     unittest.main()
