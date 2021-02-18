@@ -18,13 +18,14 @@ class Objects(dict):
             return super(Objects, self).__getitem__(key)
         except Exception as e:
             raise Exception("** no instance found **")
-    
+
     def pop(self, key):
         """pop item"""
         try:
             return super(Objects, self).pop(key)
         except Exception as e:
             raise Exception("** no instance found **")
+
 
 class FileStorage:
     """
@@ -42,6 +43,10 @@ class FileStorage:
     def all(self):
         """return the class atribute objects"""
         return FileStorage.__objects
+
+    def reset(self):
+        """clear data on __object (cache)"""
+        self.__objects.clear()
 
     def new(self, obj):
         """sets in __objects the obj with key <obj class name>.id"""

@@ -6,7 +6,7 @@ Test file for the base_mode class
 import unittest
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
-
+import os
 
 class TestClass(unittest.TestCase):
     """Test cases"""
@@ -19,6 +19,8 @@ class TestClass(unittest.TestCase):
     def tearDown(self):
         del(self.storage)
         del(self.model)
+        if os.path.exists("file.json"):
+            os.remove("file.json")
         return super().tearDown()
 
     def test_is_instance(self):
@@ -42,6 +44,10 @@ class TestClass(unittest.TestCase):
             self.storage.find,
             'BaseModel',
             'does-not-exist')
+
+    def test_reset(self):
+        """reset"""
+        pass
 
     def test_new_method(self):
         """new"""

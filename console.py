@@ -19,6 +19,10 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program"""
         return True
 
+    def do_EOF(self, arg):
+        """Quit console"""
+        return True
+
     def emptyline(self):
         """empty line. Do nothing"""
         return False
@@ -75,7 +79,7 @@ class HBNBCommand(cmd.Cmd):
 
         try:
             model_name, model_id = arg.split(' ')
-            models.classes[model_name] # check the model is supported
+            models.classes[model_name]  # check the model is supported
             models.storage.delete(model_name, model_id)
             models.storage.save()
 
