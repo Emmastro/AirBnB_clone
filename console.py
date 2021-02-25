@@ -90,7 +90,7 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """
         Prints all string representation of all instances
-        based or not on the class name
+        based or not on the class name.
         """
         if arg == "":
             print([x.__str__() for x in models.storage.all().values()])
