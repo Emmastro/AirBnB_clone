@@ -21,5 +21,6 @@ class TestClass(unittest.TestCase):
         new_user = User()
         self.assertIsInstance(new_user, BaseModel)
 
+
 if __name__ == '__main__':
     unittest.main()

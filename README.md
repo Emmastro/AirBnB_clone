@@ -8,15 +8,15 @@
 <div align="center">
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
+[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/Emmastro/AirBnB_clone/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github./pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
 </div>
 
 ---
 
-<p align="center"> Few lines describing your project.
+<p align="center"> Holberton project
     <br> 
 </p>
 
@@ -27,64 +27,36 @@
 - [Deployment](#deployment)
 - [Usage](#usage)
 - [Built Using](#built_using)
-- [TODO](../TODO.md)
 - [Contributing](../CONTRIBUTING.md)
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
 
 ## 🧐 About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+This is a Airbnb clone projects that will be build with the aim to learn and apply concepts of high level programming and software engineering in general
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them.
-
-```
-Give examples
-```
+Python3
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
+Clone this reposito
 
 ```
-Give the example
+git clone git@github.com:Emmastro/AirBnB_clone.git
+cd AirBnB_clone
+./console.py
 ```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
 
 ## 🔧 Running the tests <a name = "tests"></a>
 
-Explain how to run the automated tests for this system.
+This project uses the python unittest model for automated tests
 
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
 
 #### Run all unit tests
 `python3 -m unittest discover tests`
@@ -94,27 +66,64 @@ Give an example
 
 ## 🎈 Usage <a name="usage"></a>
 
-Add notes about how to use the system.
+You can run the schell (in an interactive or non-interactive mode) to manipulate your models.
+You can start it from running the console.py file:
 
-## 🚀 Deployment <a name = "deployment"></a>
+```
+$ ./console.py
+```
 
-Add additional notes about how to deploy this on a live system.
+The following commands are supported:
+
+### create: 
+  Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id. 
+  Ex: 
+  ```
+  $ create BaseModel
+  ```
+
+### show: 
+  Prints the string representation of an instance based on the class name and id. 
+  Ex: 
+  ```
+  $ show BaseModel 1234-1234-1234.
+  ```
+
+### destroy:
+  Deletes an instance based on the class name and id (save the change into the JSON file). 
+  Ex:
+  ```
+  $ destroy BaseModel 1234-1234-1234.
+  ```
+
+### all:
+  Prints all string representation of all instances based or not on the class name. 
+  Example to show all instances
+  ```
+  $ all
+  ```
+
+  Example to show all instances of BaseModel only
+  ```
+  $ all BaseModel
+  ```
+
+### update:
+  Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file). 
+  Ex: 
+  ```
+  $ update BaseModel 1234-1234-1234 email "aibnb@holbertonschool.com"
+  ```
+
+### quit:
+  Quit the shell 
+
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
+- [Python](https://www.python.org/) - Programming language
 
 ## ✍️ Authors <a name = "authors"></a>
 
-- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
-
-See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
-
-## 🎉 Acknowledgements <a name = "acknowledgement"></a>
-
-- Hat tip to anyone whose code was used
-- Inspiration
-- References
+- [@Dirac156](https://github.com/Dirac156) - Dirac Murairi
+- [@Emmastro](https://github.com/Emmastro) - Emmanuel Murairi

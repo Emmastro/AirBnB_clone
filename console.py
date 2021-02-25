@@ -19,6 +19,10 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program"""
         return True
 
+    def do_EOF(self, arg):
+        """Quit console"""
+        return True
+
     def emptyline(self):
         """empty line. Do nothing"""
         return False
@@ -75,6 +79,7 @@ class HBNBCommand(cmd.Cmd):
 
         try:
             model_name, model_id = arg.split(' ')
+            models.classes[model_name]  # check the model is supported
             models.storage.delete(model_name, model_id)
             models.storage.save()
 
@@ -95,19 +100,15 @@ class HBNBCommand(cmd.Cmd):
         if arg == "":
             print([x.__str__() for x in models.storage.all().values()])
         else:
-
             try:
-                model = models.get_model(arg)
+                model = models.classes[arg]
                 resp = []
                 for l in models.storage.all().values():
                     if type(l) == model:
                         resp.append(l.__str__())
-
+                print(resp)
             except Exception as e:
                 print(e)
-                return
-
-            return resp
 
     def do_update(self, arg):
         """
@@ -140,8 +141,6 @@ class HBNBCommand(cmd.Cmd):
                 print("** too many arguments (2 arguments required)**")
             else:
                 print(e)
-
-        raise Exception("** class doesn't exist **")
 
 
 if __name__ == '__main__':

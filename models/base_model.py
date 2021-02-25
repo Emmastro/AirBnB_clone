@@ -32,6 +32,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def save(self):
         """save new informations to the class object"""
@@ -51,7 +52,7 @@ class BaseModel:
     def __str__(self):
         """return the string formated message when instance is called"""
         clName = self.__class__.__name__
-        return "[{}] ({}) <{}>".format(clName, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(clName, self.id, self.__dict__)
 
 
 class BaseModelEncoder(JSONEncoder):

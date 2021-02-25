@@ -6,6 +6,7 @@ File storage:  serializes instances to a JSON file and
 
 import json
 import models
+import os
 
 
 class Objects(dict):
@@ -16,7 +17,14 @@ class Objects(dict):
         try:
             return super(Objects, self).__getitem__(key)
         except Exception as e:
-            raise KeyError("** no instance found **")
+            raise Exception("** no instance found **")
+
+    def pop(self, key):
+        """pop item"""
+        try:
+            return super(Objects, self).pop(key)
+        except Exception as e:
+            raise Exception("** no instance found **")
 
 
 class FileStorage:
@@ -36,6 +44,10 @@ class FileStorage:
         """return the class atribute objects"""
         return FileStorage.__objects
 
+    def reset(self):
+        """clear data on __object (cache)"""
+        self.__objects.clear()
+
     def new(self, obj):
         """sets in __objects the obj with key <obj class name>.id"""
         if obj is not None:
@@ -45,6 +57,7 @@ class FileStorage:
     def save(self):
         """ serializes __objects to the JSON file (path: __file_path)"""
         file = FileStorage.__file_path
+
         with open(file, mode="w", encoding="utf-8") as f:
             f.write(
                 json.dumps(
@@ -57,20 +70,19 @@ class FileStorage:
         """deserializes the JSON file to __objects"""
 
         file = FileStorage.__file_path
+        if not os.path.exists(file):
+            return
         try:
-            with open(file, mode="r", encoding="utf-8") as f:
-                file_string = f.read().replace('\n', '')
+            with open(file, mode="r+", encoding="utf-8") as f:
+                file_string = f.read()
                 data = json.loads(file_string)
                 for object_key, model_data in data.items():
                     model_name, model_id = object_key.split('.')
-                    model = models.classes[model_name]()
-
-                    for key, value in model_data.items():
-                        if key != '__class__':
-                            setattr(model, key, value)
+                    model = models.classes[model_name](**model_data)
                     self.new(model)
-        except:
-            pass
+
+        except Exception as e:
+            print(e)
 
     def update(self, obj_name, obj_id, attr, value):
         """update object with id `obj_id`"""
@@ -85,4 +97,4 @@ class FileStorage:
         """
         delete object with id `obj_id`
         """
-        del(self.__objects["{}.{}".format(obj_name, obj_id)])
+        return self.__objects.pop("{}.{}".format(obj_name, obj_id))

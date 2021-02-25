@@ -21,5 +21,6 @@ class TestClass(unittest.TestCase):
         new_state = Review()
         self.assertIsInstance(new_state, BaseModel)
 
+
 if __name__ == '__main__':
     unittest.main()
